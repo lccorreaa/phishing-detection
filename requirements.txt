@@ -3,3 +3,7 @@ python-dotenv
 pandas
 numpy
 scikit-learn
+nltk
+beautifulsoup4
+matplotlib
+seaborn
