@@ -33,7 +33,18 @@ python src/tfidf_training.py
 
 The script reads `data/CEAS_08.csv`, removes HTML markup from email bodies, normalizes whitespace, and splits the labeled records into 80% training and 20% test data. The split is stratified and uses a fixed random seed (`42`) so the same split can be reproduced.
 
-It prints a classification report (precision, recall, and F1) and a confusion matrix. In the matrix, rows are the true labels and columns are predicted labels, ordered as `0` (legitimate) and `1` (malicious). The trained pipeline is saved to:
+It prints a classification report (precision, recall, and F1) and a confusion matrix. In the matrix, rows are the true labels and columns are predicted labels, ordered as `0` (legitimate) and `1` (malicious).
+
+With the current dataset and settings, the held-out set contains 7,831 emails. The confusion matrix is:
+
+| Actual / Predicted | Legitimate (0) | Malicious (1) |
+| --- | ---: | ---: |
+| Legitimate (0) | 3,446 | 16 |
+| Malicious (1) | 18 | 4,351 |
+
+That is, the model correctly classified 3,446 legitimate emails and 4,351 malicious emails; it flagged 16 legitimate emails as malicious and missed 18 malicious emails. These numbers correspond to the fixed random split (`random_state=42`) and will change if the dataset or model settings change.
+
+The trained pipeline is saved to:
 
 ```text
 models/tfidf_logistic_regression.joblib
